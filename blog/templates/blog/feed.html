@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %} {% block content %}
+<div class="container">
+  <div class="card border border-success">
+    <div class="card-body p-1 m-auto">
+      <h2></h2>
+    </div>
+  </div>
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="card m-2">
+        <h1 class="card-header blog-title text-light bg-success m-0 px-4 py-2">
+          {{ post.title }}
+        </h1>
+        <div class="card-body text-light bg-success">
+          <!-- <h1 class="card-title blog-title">{{ post.title }}</h1> -->
+          <h6 class="card-subtitle mb-2">
+            By <span>{{ post.author }}</span> on
+            <span>{{ post.date_posted|date:"F d, Y" }}</span>
+
+            <br />
+            <small>Tag: {{ post.get_category_display }} </small>
+            <br />
+            <small> {{ post.likes }} Likes</small>
+          </h6>
+          <p class="card-text">
+            {{ post.get_description_snippet }}
+          </p>
+          <a href="/post/{{ post.id }}" class="card-link text-light"
+            ><u>View</u></a
+          >
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

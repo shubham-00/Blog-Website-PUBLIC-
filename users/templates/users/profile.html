@@ -1,0 +1,138 @@
+{% extends 'blog/base.html' %} {% load crispy_forms_tags %} {% block content %}
+<div class="">
+  <div class="profile-section m-2">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="card m-auto" style="max-width: 250px;">
+          <img
+            src="{{ author.profile.image.url }}"
+            class="card-img-top img-rounded p-1 m-auto"
+            alt="profile picture"
+            style="
+              border: 1px solid green;
+              max-height: 250px;
+              max-width: 250px;
+            "
+          />
+          <div class="card-body border border-success">
+            <h5 class="card-title">{{ author.username }}</h5>
+            <p class="card-text">{{ author.email }}</p>
+            {% if user.username == author.username %}
+            <p>
+              <a
+                href="{% url 'blog-create_post' %}"
+                class="btn btn-sm btn-success m-auto w-100"
+                >New post</a
+              >
+            </p>
+            {% endif %}
+            <p>
+              <a
+                href="/posts/{{ author.username }}/"
+                class="btn btn-sm btn-success m-auto w-100"
+                >Posts</a
+              >
+            </p>
+            {% if user.username != author.username %}
+            <!-- <form action="">
+              <p class="w-100">
+                <span>{{ followers }} Follower(s)</span>
+                <input
+                  hidden
+                  name="profile_user"
+                  type="text"
+                  value="{{author.username}}"
+                />
+                <button type="submit" class="btn btn-sm btn-success m-auto">
+                  Follow
+                </button>
+              </p>
+            </form> -->
+            <form id="follow" method="POST" style="display: inline-block;">
+              <p>
+                {% csrf_token %}
+                <input hidden type="text" name="follow_to" value="123" />
+                <span id="current_followers">{{ followers }}</span>
+                <span>Follower(s)</span>
+                {% if user.is_authenticated %}
+                <button
+                  class="btn btn-sm btn-success"
+                  type="submit"
+                  onclick="toggleFollow()"
+                >
+                  {% if following %}
+                  <span id="followText">Unfollow</span>
+                  {% else %}
+                  <span id="followText">Follow</span>
+                  {% endif %}
+                </button>
+                {% else %}
+                <button
+                  class="btn btn-sm btn-success"
+                  type="button"
+                  onclick="window.location = `{% url 'users-login' %}`"
+                >
+                  Follow
+                </button>
+                {% endif %}
+              </p>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        {% if user.username == author.username %}
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+              Profile Info
+            </legend>
+            {{ u_form|crispy }} {{ p_form|crispy }}
+          </fieldset>
+          <div class="form-group">
+            <button class="btn btn-sm btn-outline-info" type="submit">
+              Update
+            </button>
+          </div>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block script %}
+
+<script type="text/javascript">
+  $("#follow").submit(function (e) {
+    // prevent from normal form behaviour
+    e.preventDefault();
+    // serialize the form data
+    var serializedData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "/profile/{{ author.username }}/",
+      data: serializedData,
+      success: function (response) {
+        //reset the form after successful submit
+        document.getElementById("current_followers").textContent = response;
+        $("#follow")[0].reset();
+      },
+      error: function (response) {
+        console.log(response);
+      },
+    });
+  });
+
+  const toggleFollow = () => {
+    if (document.querySelector("#followText").textContent == "Follow") {
+      document.querySelector("#followText").textContent = "Unfollow";
+    } else {
+      document.querySelector("#followText").textContent = "Follow";
+    }
+  };
+</script>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<div class="container">
+      <style>
+        .icon-bar a {
+          display: inline-block;
+          height: 70px;
+          width: 70px;
+          border-radius: 50%;
+          text-align: center;
+          padding: 10px;
+          color: white;
+          font-size: 30px;
+        }
+        .icon-bar a:hover {
+          background-color: #111;
+        }
+      </style>
+      <!-- Load font awesome icons -->
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+      <br />
+      <div class="card mx-auto text-white bg-success" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Hello</h5>
+          <h6 class="card-subtitle mb-2">Glad, you are here!</h6>
+          <hr />
+          <p class="card-text">
+            I would love to know your thoughts!
+          </p>
+        </div>
+        <div class="icon-bar mx-auto">
+          <a href="https://www.linkedin.com/in/srpatel980/" class="linkedin" title="LinkedIn"
+            ><i class="fa fa-linkedin"></i
+          ></a>
+          <a href="#" class="twitter" title="Twitter"
+            ><i class="fa fa-twitter"></i
+          ></a>
+          <a href="#" class="instagram" title="Instagram"
+            ><i class="fa fa-instagram"></i
+          ></a>
+          <a href="#" class="youtube" title="YouTube"
+            ><i class="fa fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %} {% block content %} {% load crispy_forms_tags %}
+<div class="container">
+  <div class="form-section bg-success p-2">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4 text-light">
+          Join Today
+        </legend>
+        {{ form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-sm btn-outline-light text-light" type="submit">
+          Sign up
+        </button>
+      </div>
+    </form>
+    <div class="border-top py-3">
+      <small class="text-light">
+        Already have an account ?
+        <a href="{% url 'users-login' %}" class="ml-2 text-light">Sign in</a>
+      </small>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block script %}
+<script>
+  window.onload = () => {
+    let inputElements = document.getElementsByTagName("input");
+    for (let element = 0; element < inputElements.length; element++) {
+      if (inputElements[element].className) {
+        inputElements[element].className +=
+          " form-control-sm m-2 my-2 w-50 mx-2";
+      } else {
+        inputElements[element].className = "form-control-sm my-2 w-50 mx-2";
+      }
+    }
+
+    let labelElements = document.getElementsByTagName("label");
+    for (let element = 0; element < labelElements.length; element++) {
+      if (labelElements[element].className) {
+        labelElements[element].className += " text-light";
+      } else {
+        labelElements[element].className = "text-light";
+      }
+    }
+
+    document.getElementById("hint_id_username").className =
+      "form-text text-light";
+
+    document.getElementById("hint_id_password1").className =
+      "form-text text-light";
+
+    document.getElementById("hint_id_password2").className =
+      "form-text text-light";
+  };
+</script>
+{% endblock %}

@@ -1,0 +1,181 @@
+{% extends 'blog/base.html' %} {% load static %} {% block content %}
+
+<!-- Carousel -->
+
+<div
+  id="carouselExampleFade"
+  class="carousel slide carousel-fade"
+  data-ride="carousel"
+  style="width: 70%; margin: auto;"
+>
+  <div class="carousel-inner rounded">
+    <div class="carousel-item active">
+      <img
+        src="{% static 'blog/images/carousel_img_1.jpg' %}"
+        class="d-block w-100"
+        alt="..."
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="{% static 'blog/images/carousel_img_2.jpg' %}"
+        class="d-block w-100"
+        alt="..."
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="{% static 'blog/images/carousel_img_3.jpg' %}"
+        class="d-block w-100"
+        alt="..."
+      />
+    </div>
+  </div>
+  <a
+    class="carousel-control-prev"
+    href="#carouselExampleFade"
+    role="button"
+    data-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a
+    class="carousel-control-next"
+    href="#carouselExampleFade"
+    role="button"
+    data-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<!-- /Carousel -->
+
+<br />
+<hr />
+<br />
+
+<!-- Quotes -->
+<div class="info">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card" style="height: 125px; max-height: 200px;">
+          <div class="card-body text-light bg-success">
+            <!-- <h5 class="card-title">Everything for programming</h5> -->
+            <p class="card-text">
+              “Talk is cheap. Show me the code.”<br />― Linus Torvalds
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card" style="height: 125px; max-height: 200px;">
+          <div class="card-body text-light bg-success">
+            <!-- <h5 class="card-title">Mind it</h5> -->
+            <p class="card-text">
+              “Any fool can write code that a computer can understand. Good
+              programmers write code that humans can understand.”<br />― Martin
+              Fowler
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card" style="height: 125px; max-height: 200px;">
+          <div class="card-body text-light bg-success">
+            <!-- <h5 class="card-title">Ask</h5> -->
+            <p class="card-text">
+              “I'm not a great programmer; I'm just a good programmer with great
+              habits.”<br />― Kent Beck
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card" style="height: 125px; max-height: 200px;">
+          <div class="card-body text-light bg-success">
+            <!-- <h5 class="card-title">Ask</h5> -->
+            <p class="card-text">
+              “Truth can only be found in one place: the code.”<br />― Robert C.
+              Martin
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card" style="height: 125px; max-height: 200px;">
+          <div class="card-body text-light bg-success">
+            <!-- <h5 class="card-title">Ask</h5> -->
+            <p class="card-text">
+              “How you look at it is pretty much how you'll see it”<br />―
+              Rasheed Ogunlaru
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Quotes -->
+
+<br />
+<hr />
+<br />
+
+<!-- Latest Posts -->
+<div class="latest">
+  <div class="container">
+    <div class="card border border-success">
+      <div class="card-body p-1 m-auto"><h2>Recent Posts</h2></div>
+    </div>
+    <div class="row">
+      {% for post in posts %}
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="card m-2">
+          <h1
+            class="card-header blog-title text-light bg-success m-0 px-4 py-2"
+          >
+            {{ post.title }}
+          </h1>
+          <div class="card-body text-light bg-success">
+            <!-- <h1 class="card-title blog-title">{{ post.title }}</h1> -->
+            <h6 class="card-subtitle mb-2">
+              By <span>{{ post.author }}</span> on
+              <span>{{ post.date_posted|date:"F d, Y" }}</span>
+
+              <br />
+              <small>Tag: {{ post.get_category_display }} </small>
+              <br />
+              <small> {{ post.likes }} Likes</small>
+            </h6>
+            <p class="card-text">
+              {{ post.get_description_snippet }}
+            </p>
+            <a href="/post/{{ post.id }}" class="card-link text-light"
+              ><u>View</u></a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- /Latest Posts -->
+
+<!-- Speciality -->
+<div class="speciality"></div>
+<!-- /Speciality -->
+
+<!-- Popular Posts -->
+<div class="popular"></div>
+<!-- /Popular Posts -->
+
+{% endblock %}
