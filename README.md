@@ -7,4 +7,4 @@ It is using google firebase storage for storing static images as well as users' 
 It is using postgres database. It also has SSL certificate and certificate renews automatically by cron jobs.  
 I can connect to server from any computer using SSH.  And I can make any changes in it. 
 I would like to get suggestions that I can implement in this website. Or if you like, you can do some hacking attacks but let me know if you do, and what can I do to prevent them.  
-If you want to make a website or a web app, for your self or for your business, please contact me.
+NOTE:   If you want to make a website or a web app, for your self or for your business, please contact me.
